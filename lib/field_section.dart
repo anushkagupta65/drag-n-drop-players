@@ -32,7 +32,8 @@ class FieldSection extends StatelessWidget {
                     child: Text(
                       title,
                       style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),

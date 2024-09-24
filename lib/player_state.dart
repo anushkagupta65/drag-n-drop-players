@@ -8,6 +8,9 @@ class PlayerState with _$PlayerState {
     @Default(false) bool isDragging,
     @Default(null) Player? draggedPlayer,
     @Default(Offset.zero) Offset draggedPlayerOffset,
+    @Default(0) int onFieldCount,
+    @Default(0) int offFieldCount,
+    @Default('') String draggedPlayerStatus,
   }) = _PlayerState;
 
   factory PlayerState.initial() => PlayerState(
@@ -16,5 +19,8 @@ class PlayerState with _$PlayerState {
         isDragging: false,
         draggedPlayer: null,
         draggedPlayerOffset: Offset.zero,
+        onFieldCount: 0,
+        offFieldCount: InitialPlayers.offFieldPlayers.length,
+        draggedPlayerStatus: '',
       );
 }

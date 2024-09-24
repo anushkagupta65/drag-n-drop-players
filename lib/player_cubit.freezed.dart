@@ -21,6 +21,9 @@ mixin _$PlayerState {
   bool get isDragging => throw _privateConstructorUsedError;
   Player? get draggedPlayer => throw _privateConstructorUsedError;
   Offset get draggedPlayerOffset => throw _privateConstructorUsedError;
+  int get onFieldCount => throw _privateConstructorUsedError;
+  int get offFieldCount => throw _privateConstructorUsedError;
+  String get draggedPlayerStatus => throw _privateConstructorUsedError;
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.
@@ -40,7 +43,10 @@ abstract class $PlayerStateCopyWith<$Res> {
       List<Player> onFieldPlayers,
       bool isDragging,
       Player? draggedPlayer,
-      Offset draggedPlayerOffset});
+      Offset draggedPlayerOffset,
+      int onFieldCount,
+      int offFieldCount,
+      String draggedPlayerStatus});
 }
 
 /// @nodoc
@@ -63,6 +69,9 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
     Object? isDragging = null,
     Object? draggedPlayer = freezed,
     Object? draggedPlayerOffset = null,
+    Object? onFieldCount = null,
+    Object? offFieldCount = null,
+    Object? draggedPlayerStatus = null,
   }) {
     return _then(_value.copyWith(
       offFieldPlayers: null == offFieldPlayers
@@ -85,6 +94,18 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
           ? _value.draggedPlayerOffset
           : draggedPlayerOffset // ignore: cast_nullable_to_non_nullable
               as Offset,
+      onFieldCount: null == onFieldCount
+          ? _value.onFieldCount
+          : onFieldCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      offFieldCount: null == offFieldCount
+          ? _value.offFieldCount
+          : offFieldCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      draggedPlayerStatus: null == draggedPlayerStatus
+          ? _value.draggedPlayerStatus
+          : draggedPlayerStatus // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -102,7 +123,10 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
       List<Player> onFieldPlayers,
       bool isDragging,
       Player? draggedPlayer,
-      Offset draggedPlayerOffset});
+      Offset draggedPlayerOffset,
+      int onFieldCount,
+      int offFieldCount,
+      String draggedPlayerStatus});
 }
 
 /// @nodoc
@@ -123,6 +147,9 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
     Object? isDragging = null,
     Object? draggedPlayer = freezed,
     Object? draggedPlayerOffset = null,
+    Object? onFieldCount = null,
+    Object? offFieldCount = null,
+    Object? draggedPlayerStatus = null,
   }) {
     return _then(_$PlayerStateImpl(
       offFieldPlayers: null == offFieldPlayers
@@ -145,6 +172,18 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
           ? _value.draggedPlayerOffset
           : draggedPlayerOffset // ignore: cast_nullable_to_non_nullable
               as Offset,
+      onFieldCount: null == onFieldCount
+          ? _value.onFieldCount
+          : onFieldCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      offFieldCount: null == offFieldCount
+          ? _value.offFieldCount
+          : offFieldCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      draggedPlayerStatus: null == draggedPlayerStatus
+          ? _value.draggedPlayerStatus
+          : draggedPlayerStatus // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -157,7 +196,10 @@ class _$PlayerStateImpl implements _PlayerState {
       final List<Player> onFieldPlayers = const [],
       this.isDragging = false,
       this.draggedPlayer = null,
-      this.draggedPlayerOffset = Offset.zero})
+      this.draggedPlayerOffset = Offset.zero,
+      this.onFieldCount = 0,
+      this.offFieldCount = 0,
+      this.draggedPlayerStatus = ''})
       : _offFieldPlayers = offFieldPlayers,
         _onFieldPlayers = onFieldPlayers;
 
@@ -188,10 +230,19 @@ class _$PlayerStateImpl implements _PlayerState {
   @override
   @JsonKey()
   final Offset draggedPlayerOffset;
+  @override
+  @JsonKey()
+  final int onFieldCount;
+  @override
+  @JsonKey()
+  final int offFieldCount;
+  @override
+  @JsonKey()
+  final String draggedPlayerStatus;
 
   @override
   String toString() {
-    return 'PlayerState(offFieldPlayers: $offFieldPlayers, onFieldPlayers: $onFieldPlayers, isDragging: $isDragging, draggedPlayer: $draggedPlayer, draggedPlayerOffset: $draggedPlayerOffset)';
+    return 'PlayerState(offFieldPlayers: $offFieldPlayers, onFieldPlayers: $onFieldPlayers, isDragging: $isDragging, draggedPlayer: $draggedPlayer, draggedPlayerOffset: $draggedPlayerOffset, onFieldCount: $onFieldCount, offFieldCount: $offFieldCount, draggedPlayerStatus: $draggedPlayerStatus)';
   }
 
   @override
@@ -208,7 +259,13 @@ class _$PlayerStateImpl implements _PlayerState {
             (identical(other.draggedPlayer, draggedPlayer) ||
                 other.draggedPlayer == draggedPlayer) &&
             (identical(other.draggedPlayerOffset, draggedPlayerOffset) ||
-                other.draggedPlayerOffset == draggedPlayerOffset));
+                other.draggedPlayerOffset == draggedPlayerOffset) &&
+            (identical(other.onFieldCount, onFieldCount) ||
+                other.onFieldCount == onFieldCount) &&
+            (identical(other.offFieldCount, offFieldCount) ||
+                other.offFieldCount == offFieldCount) &&
+            (identical(other.draggedPlayerStatus, draggedPlayerStatus) ||
+                other.draggedPlayerStatus == draggedPlayerStatus));
   }
 
   @override
@@ -218,7 +275,10 @@ class _$PlayerStateImpl implements _PlayerState {
       const DeepCollectionEquality().hash(_onFieldPlayers),
       isDragging,
       draggedPlayer,
-      draggedPlayerOffset);
+      draggedPlayerOffset,
+      onFieldCount,
+      offFieldCount,
+      draggedPlayerStatus);
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.
@@ -235,7 +295,10 @@ abstract class _PlayerState implements PlayerState {
       final List<Player> onFieldPlayers,
       final bool isDragging,
       final Player? draggedPlayer,
-      final Offset draggedPlayerOffset}) = _$PlayerStateImpl;
+      final Offset draggedPlayerOffset,
+      final int onFieldCount,
+      final int offFieldCount,
+      final String draggedPlayerStatus}) = _$PlayerStateImpl;
 
   @override
   List<Player> get offFieldPlayers;
@@ -247,6 +310,12 @@ abstract class _PlayerState implements PlayerState {
   Player? get draggedPlayer;
   @override
   Offset get draggedPlayerOffset;
+  @override
+  int get onFieldCount;
+  @override
+  int get offFieldCount;
+  @override
+  String get draggedPlayerStatus;
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.

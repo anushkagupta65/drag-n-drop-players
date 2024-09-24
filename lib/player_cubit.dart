@@ -11,7 +11,11 @@ class PlayerCubit extends Cubit<PlayerState> {
   PlayerCubit() : super(PlayerState.initial());
 
   void startDragging(Player player) {
-    emit(state.copyWith(isDragging: true, draggedPlayer: player));
+    emit(state.copyWith(
+      isDragging: true,
+      draggedPlayer: player,
+      draggedPlayerStatus: 'Dragging ${player.name}',
+    ));
   }
 
   void updateDraggedPlayerOffset(Offset offset) {
@@ -25,12 +29,18 @@ class PlayerCubit extends Cubit<PlayerState> {
   void dropOnOnField(Player player) {
     if (!player.isDropped) {
       moveToOnField(player);
+      emit(state.copyWith(
+        draggedPlayerStatus: '${player.name} moved to On Field',
+      ));
     }
   }
 
   void dropOnOffField(Player player) {
     if (player.isDropped) {
       moveToOffField(player);
+      emit(state.copyWith(
+        draggedPlayerStatus: '${player.name} moved to Off Field',
+      ));
     }
   }
 
@@ -43,6 +53,8 @@ class PlayerCubit extends Cubit<PlayerState> {
     emit(state.copyWith(
       offFieldPlayers: updatedOffField,
       onFieldPlayers: updatedOnField,
+      onFieldCount: updatedOnField.length,
+      offFieldCount: updatedOffField.length,
     ));
   }
 
@@ -55,6 +67,8 @@ class PlayerCubit extends Cubit<PlayerState> {
     emit(state.copyWith(
       offFieldPlayers: updatedOffField,
       onFieldPlayers: updatedOnField,
+      onFieldCount: updatedOnField.length,
+      offFieldCount: updatedOffField.length,
     ));
   }
 }
