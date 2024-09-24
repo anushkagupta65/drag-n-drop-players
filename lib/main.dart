@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:player_drag/player_field.dart';
+import 'package:player_drag/player_field_screen.dart';
 
 void main() {
   runApp(const MyApp());

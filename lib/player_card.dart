@@ -16,7 +16,7 @@ class PlayerCard extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.primary,
       child: Text(
         player.name,
-        style: TextStyle(fontSize: 8, color: Colors.white),
+        style: const TextStyle(fontSize: 8, color: Colors.white),
       ),
     );
   }

@@ -1,25 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:player_drag/player_card.dart';
 import 'player_cubit.dart';
-// import 'dart:math';
-
-class PlayerFieldScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => PlayerCubit(),
-      child: const Scaffold(
-        body: Column(
-          children: [
-            Expanded(child: FieldSection(title: 'On Field', isOnField: true)),
-            Expanded(child: FieldSection(title: 'Off Field', isOnField: false)),
-          ],
-        ),
-      ),
-    );
-  }
-}
+import 'player_card.dart';
 
 class FieldSection extends StatelessWidget {
   final String title;
@@ -27,8 +9,8 @@ class FieldSection extends StatelessWidget {
 
   const FieldSection({
     super.key,
-    required this.title,
     required this.isOnField,
+    required this.title,
   });
 
   @override
@@ -81,6 +63,11 @@ class FieldSection extends StatelessWidget {
                               details.delta + state.draggedPlayerOffset);
                         },
                         onDragEnd: (details) {
+                          if (isOnField) {
+                            context.read<PlayerCubit>().dropOnOffField(player);
+                          } else {
+                            context.read<PlayerCubit>().dropOnOnField(player);
+                          }
                           context.read<PlayerCubit>().stopDragging();
                         },
                       ),
