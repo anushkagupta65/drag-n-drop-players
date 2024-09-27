@@ -3,70 +3,25 @@ import 'dart:ui';
 import 'package:player_drag/player_model.dart';
 
 class InitialPlayers {
-  static List<Player> offFieldPlayers = [
-    Player(
-      name: "P1",
-      age: 20,
-      description: "Description 1",
-      isDropped: false,
-      position:
-          Offset(Random().nextDouble() * 360, Random().nextDouble() * 360),
-    ),
-    Player(
-      name: "P2",
-      age: 21,
-      description: "Description 2",
-      isDropped: false,
-      position:
-          Offset(Random().nextDouble() * 360, Random().nextDouble() * 360),
-    ),
-    Player(
-      name: "P3",
-      age: 22,
-      description: "Description 3",
-      isDropped: false,
-      position:
-          Offset(Random().nextDouble() * 360, Random().nextDouble() * 360),
-    ),
-    Player(
-      name: "P4",
-      age: 23,
-      description: "Description 4",
-      isDropped: false,
-      position:
-          Offset(Random().nextDouble() * 360, Random().nextDouble() * 360),
-    ),
-    Player(
-      name: "P5",
-      age: 24,
-      description: "Description 5",
-      isDropped: false,
-      position:
-          Offset(Random().nextDouble() * 360, Random().nextDouble() * 360),
-    ),
-    Player(
-      name: "P6",
-      age: 25,
-      description: "Description 6",
-      isDropped: false,
-      position:
-          Offset(Random().nextDouble() * 360, Random().nextDouble() * 360),
-    ),
-    Player(
-      name: "P7",
-      age: 26,
-      description: "Description 7",
-      isDropped: false,
-      position:
-          Offset(Random().nextDouble() * 360, Random().nextDouble() * 360),
-    ),
-    Player(
-      name: "P8",
-      age: 27,
-      description: "Description 8",
-      isDropped: false,
-      position:
-          Offset(Random().nextDouble() * 360, Random().nextDouble() * 360),
-    ),
-  ];
+  static String initialStatus = "Off"; // Set initial status to OFF
+  static List<Player> offFieldPlayers = _generateInitialPlayers();
+
+  static List<Player> _generateInitialPlayers() {
+    final Random random = Random();
+    const double screenHeight =
+        600; // Adjust this to your app's screen height as needed
+    const double centerLineY = screenHeight / 2; // Center line position
+
+    return List.generate(8, (index) {
+      return Player(
+        name: "P${index + 1}",
+        position: Offset(
+          random.nextDouble() * 300, // Random x position within width
+          random.nextDouble() * (centerLineY - 60) +
+              (centerLineY + 60), // Random y position below center line
+        ),
+        status: initialStatus,
+      );
+    });
+  }
 }

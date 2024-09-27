@@ -2,32 +2,25 @@ import 'dart:ui';
 
 class Player {
   final String name;
-  final int age;
-  final String description;
-  final bool isDropped;
   final Offset position;
+  final String status;
 
   Player({
     required this.name,
-    required this.age,
-    required this.description,
-    required this.isDropped,
     required this.position,
+    required this.status
   });
 
   Player copyWith({
     String? name,
-    int? age,
-    String? description,
-    bool? isDropped,
     Offset? position,
+    String? status,
   }) {
     return Player(
+
       name: name ?? this.name,
-      age: age ?? this.age,
-      description: description ?? this.description,
-      isDropped: isDropped ?? this.isDropped,
       position: position ?? this.position,
+      status: status?? this.status,
     );
   }
 }

@@ -1,8 +1,9 @@
-import 'package:bloc/bloc.dart';
+// player_cubit.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:player_drag/players.dart';
 import 'player_model.dart';
-import 'players.dart';
 
 part 'player_state.dart';
 part 'player_cubit.freezed.dart';
@@ -10,65 +11,48 @@ part 'player_cubit.freezed.dart';
 class PlayerCubit extends Cubit<PlayerState> {
   PlayerCubit() : super(PlayerState.initial());
 
-  void startDragging(Player player) {
+  // Update the dragged player position and status
+  void updatePosition(Offset newPosition, String playerName, double centerLine) {
+    final String newStatus = newPosition.dy < centerLine ? "ON" : "OFF";
+
+    // Update player position and status
     emit(state.copyWith(
-      isDragging: true,
-      draggedPlayer: player,
-      draggedPlayerStatus: 'Dragging ${player.name}',
+      draggedPlayerPosition: newPosition,
+      draggedPlayerName: playerName,
+      draggedPlayerStatus: newStatus,
     ));
+
+    // Update the player's position in the list
+    updatePlayerPosition(playerName, newPosition);
   }
 
-  void updateDraggedPlayerOffset(Offset offset) {
-    emit(state.copyWith(draggedPlayerOffset: offset));
-  }
-
-  void stopDragging() {
-    emit(state.copyWith(isDragging: false, draggedPlayer: null));
-  }
-
-  void dropOnOnField(Player player) {
-    if (!player.isDropped) {
-      moveToOnField(player);
-      emit(state.copyWith(
-        draggedPlayerStatus: '${player.name} moved to On Field',
-      ));
+  // Update the player's position
+  void updatePlayerPosition(String playerName, Offset newPosition) {
+    List<Player> updatedPlayers = [];
+    
+    for (var player in state.players) {
+      if (player.name == playerName) {
+        updatedPlayers.add(player.copyWith(position: newPosition));
+      } else {
+        updatedPlayers.add(player);
+      }
     }
+
+    emit(state.copyWith(players: updatedPlayers));
   }
 
-  void dropOnOffField(Player player) {
-    if (player.isDropped) {
-      moveToOffField(player);
-      emit(state.copyWith(
-        draggedPlayerStatus: '${player.name} moved to Off Field',
-      ));
+  // Update the player's status
+  void updateStatus(String playerName, String newStatus) {
+    List<Player> updatedPlayers = [];
+    
+    for (var player in state.players) {
+      if (player.name == playerName) {
+        updatedPlayers.add(player.copyWith(status: newStatus));
+      } else {
+        updatedPlayers.add(player);
+      }
     }
-  }
 
-  void moveToOnField(Player player) {
-    List<Player> updatedOffField = List.from(state.offFieldPlayers)
-      ..remove(player);
-    List<Player> updatedOnField = List.from(state.onFieldPlayers)
-      ..add(player.copyWith(isDropped: true));
-
-    emit(state.copyWith(
-      offFieldPlayers: updatedOffField,
-      onFieldPlayers: updatedOnField,
-      onFieldCount: updatedOnField.length,
-      offFieldCount: updatedOffField.length,
-    ));
-  }
-
-  void moveToOffField(Player player) {
-    List<Player> updatedOnField = List.from(state.onFieldPlayers)
-      ..remove(player);
-    List<Player> updatedOffField = List.from(state.offFieldPlayers)
-      ..add(player.copyWith(isDropped: false));
-
-    emit(state.copyWith(
-      offFieldPlayers: updatedOffField,
-      onFieldPlayers: updatedOnField,
-      onFieldCount: updatedOnField.length,
-      offFieldCount: updatedOffField.length,
-    ));
+    emit(state.copyWith(players: updatedPlayers));
   }
 }
