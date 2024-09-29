@@ -46,26 +46,3 @@
 // }
 
 
-// import 'package:flutter/material.dart';
-// import 'player_model.dart';
-
-// class PlayerCard extends StatelessWidget {
-//   final Player player;
-
-//   const PlayerCard({
-//     super.key,
-//     required this.player,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return CircleAvatar(
-//       radius: 24,
-//       backgroundColor: Theme.of(context).colorScheme.primary,
-//       child: Text(
-//         ${player.name +'\n' + player.status},
-//         style: const TextStyle(fontSize: 8, color: Colors.white),
-//       ),
-//     );
-//   }
-// }

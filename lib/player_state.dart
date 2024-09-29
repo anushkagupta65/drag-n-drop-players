@@ -13,6 +13,8 @@ class PlayerState with _$PlayerState {
         draggedPlayerPosition: Offset.zero,
         draggedPlayerName: '',
         draggedPlayerStatus: '',
-        players: InitialPlayers.offFieldPlayers,
+        players: InitialPlayers.offFieldPlayers.map((player) {
+          return player.copyWith(status: 'OFF');
+        }).toList(),
       );
 }

@@ -8,7 +8,6 @@ class PlayerFieldScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        // Wrapping with SafeArea
         child: BlocProvider(
           create: (_) => PlayerCubit(),
           child: PlayerFieldWidget(),
@@ -26,7 +25,6 @@ class PlayerFieldWidget extends StatelessWidget {
         double screenHeight = MediaQuery.of(context).size.height;
         double centerLine = screenHeight / 2;
 
-        // Count players in "On - Field" and "Off - Field"
         int onFieldCount =
             state.players.where((player) => player.status == "ON").length;
         int offFieldCount =
@@ -35,24 +33,19 @@ class PlayerFieldWidget extends StatelessWidget {
         return SafeArea(
           child: Column(
             children: [
-              // Display the player counts and currently dragged player at the top
               Container(
                 padding: const EdgeInsets.all(8.0),
                 color: Colors.white,
                 child: Center(
                   child: Text(
                     'On Field: $onFieldCount Players  |  Off Field: $offFieldCount Players',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
+                    style: const TextStyle(fontSize: 16, color: Colors.black),
                   ),
                 ),
               ),
               Expanded(
                 child: Stack(
                   children: [
-                    // Horizontal center line
                     Positioned(
                       top: centerLine - 1,
                       left: 0,
@@ -62,7 +55,6 @@ class PlayerFieldWidget extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    // Single DragTarget for both "On - Field" and "Off - Field"
                     Positioned.fill(
                       child: DragTarget<Offset>(
                         onWillAcceptWithDetails: (details) {
@@ -71,7 +63,6 @@ class PlayerFieldWidget extends StatelessWidget {
                         onAcceptWithDetails: (details) {
                           String draggedPlayerName = state.draggedPlayerName;
                           if (draggedPlayerName.isNotEmpty) {
-                            // Call the cubit method to update position
                             context.read<PlayerCubit>().updatePosition(
                                   details.offset,
                                   draggedPlayerName,
@@ -85,7 +76,7 @@ class PlayerFieldWidget extends StatelessWidget {
                               Expanded(
                                 child: Container(
                                   color: Colors.blue[200],
-                                  child: Center(
+                                  child: const Center(
                                     child: Text(
                                       'On - Field',
                                       style: TextStyle(
@@ -98,13 +89,13 @@ class PlayerFieldWidget extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                height: 2, // Center line
+                                height: 2,
                                 color: Colors.black,
                               ),
                               Expanded(
                                 child: Container(
                                   color: Colors.green[200],
-                                  child: Center(
+                                  child: const Center(
                                     child: Text(
                                       'Off - Field',
                                       style: TextStyle(
@@ -121,7 +112,6 @@ class PlayerFieldWidget extends StatelessWidget {
                         },
                       ),
                     ),
-                    // Loop through players to create draggable player widgets
                     ...state.players.asMap().entries.map((entry) {
                       Player player = entry.value;
 
@@ -140,20 +130,19 @@ class PlayerFieldWidget extends StatelessWidget {
                                   color: Colors.white, fontSize: 12),
                             ),
                           ),
-                          childWhenDragging: Container(), // Empty when dragging
+                          childWhenDragging: Container(),
                           child: CircleAvatar(
                             radius: 24,
                             backgroundColor:
                                 Theme.of(context).colorScheme.primary,
                             child: Text(
-                              '${player.name}\n${player.status}',
+                              '${player.name}\n${player.status}', 
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 12),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           onDragStarted: () {
-                            // Set the current dragged player's name
                             context.read<PlayerCubit>().updatePosition(
                                 player.position, player.name, centerLine);
                           },
