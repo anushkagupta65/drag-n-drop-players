@@ -14,7 +14,7 @@ class PlayerState with _$PlayerState {
         draggedPlayerName: '',
         draggedPlayerStatus: '',
         players: InitialPlayers.offFieldPlayers.map((player) {
-          return player.copyWith(status: 'OFF');
+          return player.copyWith(status: 'Off');
         }).toList(),
       );
 }

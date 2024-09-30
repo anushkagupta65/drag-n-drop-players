@@ -1,48 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'player_cubit.dart';
-import 'player_model.dart';
-
-class PlayerFieldScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: BlocProvider(
-          create: (_) => PlayerCubit(),
-          child: PlayerFieldWidget(),
-        ),
-      ),
-    );
-  }
-}
+import 'package:player_drag/application/player%20cubit/player_cubit.dart';
+import 'package:player_drag/data/player_model.dart';
 
 class PlayerFieldWidget extends StatelessWidget {
+  const PlayerFieldWidget({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PlayerCubit, PlayerState>(
       builder: (context, state) {
         double screenHeight = MediaQuery.of(context).size.height;
-        double centerLine = screenHeight / 2;
+        double centerLine = (screenHeight / 2) - 40;
 
         int onFieldCount =
-            state.players.where((player) => player.status == "ON").length;
+            state.players.where((player) => player.status == "On").length;
         int offFieldCount =
-            state.players.where((player) => player.status == "OFF").length;
+            state.players.where((player) => player.status == "Off").length;
 
         return SafeArea(
           child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                color: Colors.white,
-                child: Center(
-                  child: Text(
-                    'On Field: $onFieldCount Players  |  Off Field: $offFieldCount Players',
-                    style: const TextStyle(fontSize: 16, color: Colors.black),
-                  ),
-                ),
-              ),
               Expanded(
                 child: Stack(
                   children: [
@@ -136,7 +116,7 @@ class PlayerFieldWidget extends StatelessWidget {
                             backgroundColor:
                                 Theme.of(context).colorScheme.primary,
                             child: Text(
-                              '${player.name}\n${player.status}', 
+                              '${player.name}\n${player.status}',
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 12),
                               textAlign: TextAlign.center,
@@ -150,6 +130,16 @@ class PlayerFieldWidget extends StatelessWidget {
                       );
                     }).toList(),
                   ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                color: Colors.white,
+                child: Center(
+                  child: Text(
+                    'On Field: $onFieldCount Players  |  Off Field: $offFieldCount Players',
+                    style: const TextStyle(fontSize: 16, color: Colors.black),
+                  ),
                 ),
               ),
             ],

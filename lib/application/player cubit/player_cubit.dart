@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:player_drag/players.dart';
-import 'player_model.dart';
+import 'package:player_drag/data/players.dart';
+import '../../data/player_model.dart';
 
 part 'player_state.dart';
 part 'player_cubit.freezed.dart';
@@ -10,8 +10,9 @@ part 'player_cubit.freezed.dart';
 class PlayerCubit extends Cubit<PlayerState> {
   PlayerCubit() : super(PlayerState.initial());
 
-  void updatePosition(Offset newPosition, String playerName, double centerLine) {
-    final String newStatus = newPosition.dy < centerLine ? "ON" : "OFF";
+  void updatePosition(
+      Offset newPosition, String playerName, double centerLine) {
+    final String newStatus = newPosition.dy < centerLine ? "On" : "Off";
 
     emit(state.copyWith(
       draggedPlayerPosition: newPosition,
@@ -22,7 +23,8 @@ class PlayerCubit extends Cubit<PlayerState> {
     updatePlayerPositionAndStatus(playerName, newPosition, newStatus);
   }
 
-  void updatePlayerPositionAndStatus(String playerName, Offset newPosition, String newStatus) {
+  void updatePlayerPositionAndStatus(
+      String playerName, Offset newPosition, String newStatus) {
     List<Player> updatedPlayers = state.players.map((player) {
       if (player.name == playerName) {
         return player.copyWith(position: newPosition, status: newStatus);

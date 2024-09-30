@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:player_drag/player_field_screen.dart';
+import 'package:player_drag/presentation/player_field_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: PlayerFieldScreen(),
+      home: const PlayerFieldScreen(),
     );
   }
 }
