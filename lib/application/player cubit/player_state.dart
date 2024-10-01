@@ -7,13 +7,15 @@ class PlayerState with _$PlayerState {
     @Default('') String draggedPlayerName,
     @Default(Offset.zero) Offset draggedPlayerPosition,
     @Default('') String draggedPlayerStatus,
+    // @Default('') DateTime startTime,
+    // @Default('') Duration elapsedTime,
   }) = _PlayerState;
 
   factory PlayerState.initial() => PlayerState(
         draggedPlayerPosition: Offset.zero,
         draggedPlayerName: '',
         draggedPlayerStatus: '',
-        players: InitialPlayers.offFieldPlayers.map((player) {
+        players: InitialPlayers.initialPlayers().map((player) {
           return player.copyWith(status: 'Off');
         }).toList(),
       );
