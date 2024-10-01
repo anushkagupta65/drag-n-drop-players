@@ -12,7 +12,6 @@ class PlayerFieldWidget extends StatelessWidget {
     return BlocBuilder<PlayerCubit, PlayerState>(
       builder: (context, state) {
         double screenHeight = MediaQuery.of(context).size.height;
-        // double screenWidth = MediaQuery.of(context).size.width;
         double crossLine = screenHeight - 246;
 
         List<Player> onFieldPlayers =
@@ -45,10 +44,7 @@ class PlayerFieldWidget extends StatelessWidget {
                           final dropPosition = details.offset;
 
                           context.read<PlayerCubit>().updatePosition(
-                                dropPosition,
-                                player.name,
-                                crossLine,
-                              );
+                              dropPosition, player.name, crossLine);
                         },
                         builder: (context, candidateData, rejectedData) {
                           return Stack(
@@ -63,8 +59,8 @@ class PlayerFieldWidget extends StatelessWidget {
                                           children:
                                               onFieldPlayers.map((player) {
                                             return Positioned(
-                                              left: player.position.dx,
-                                              top: player.position.dy,
+                                              left: player.position!.dx,
+                                              top: player.position!.dy,
                                               child: PlayerCard(
                                                 player: player,
                                                 crossLine: crossLine,
@@ -72,24 +68,6 @@ class PlayerFieldWidget extends StatelessWidget {
                                             );
                                           }).toList(),
                                         ),
-                                      ),
-                                    ),
-                                    Container(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .surfaceBright,
-                                      height: 160,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: offFieldPlayers.length,
-                                        itemBuilder: (context, index) {
-                                          Player player =
-                                              offFieldPlayers[index];
-                                          return PlayerCard(
-                                            player: player,
-                                            crossLine: crossLine,
-                                          );
-                                        },
                                       ),
                                     ),
                                   ],
@@ -112,6 +90,36 @@ class PlayerFieldWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+              DragTarget<Player>(
+                onWillAcceptWithDetails: (details) {
+                  return true;
+                },
+                onAcceptWithDetails: (details) {
+                  final player = details.data;
+                  final dropPosition = details.offset;
+
+                  context
+                      .read<PlayerCubit>()
+                      .updatePosition(dropPosition, player.name, crossLine);
+                },
+                builder: (context, candidateData, rejectedData) {
+                  return Container(
+                    color: Theme.of(context).colorScheme.surfaceBright,
+                    height: 160,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: offFieldPlayers.length,
+                      itemBuilder: (context, index) {
+                        Player player = offFieldPlayers[index];
+                        return PlayerCard(
+                          player: player,
+                          crossLine: crossLine,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
               Container(
                 padding: const EdgeInsets.all(12.0),

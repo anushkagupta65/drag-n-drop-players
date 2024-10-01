@@ -17,9 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PlayerState {
   List<Player> get players => throw _privateConstructorUsedError;
-  String get draggedPlayerName => throw _privateConstructorUsedError;
-  Offset get draggedPlayerPosition => throw _privateConstructorUsedError;
-  String get draggedPlayerStatus => throw _privateConstructorUsedError;
+  String get playerID => throw _privateConstructorUsedError;
+  String get playerStatus => throw _privateConstructorUsedError;
+  Offset? get playerPosition => throw _privateConstructorUsedError;
+  DateTime? get startTime => throw _privateConstructorUsedError;
+  Duration? get playerOnFieldTime => throw _privateConstructorUsedError;
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.
@@ -36,9 +38,11 @@ abstract class $PlayerStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Player> players,
-      String draggedPlayerName,
-      Offset draggedPlayerPosition,
-      String draggedPlayerStatus});
+      String playerID,
+      String playerStatus,
+      Offset? playerPosition,
+      DateTime? startTime,
+      Duration? playerOnFieldTime});
 }
 
 /// @nodoc
@@ -57,27 +61,37 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
   @override
   $Res call({
     Object? players = null,
-    Object? draggedPlayerName = null,
-    Object? draggedPlayerPosition = null,
-    Object? draggedPlayerStatus = null,
+    Object? playerID = null,
+    Object? playerStatus = null,
+    Object? playerPosition = freezed,
+    Object? startTime = freezed,
+    Object? playerOnFieldTime = freezed,
   }) {
     return _then(_value.copyWith(
       players: null == players
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
-      draggedPlayerName: null == draggedPlayerName
-          ? _value.draggedPlayerName
-          : draggedPlayerName // ignore: cast_nullable_to_non_nullable
+      playerID: null == playerID
+          ? _value.playerID
+          : playerID // ignore: cast_nullable_to_non_nullable
               as String,
-      draggedPlayerPosition: null == draggedPlayerPosition
-          ? _value.draggedPlayerPosition
-          : draggedPlayerPosition // ignore: cast_nullable_to_non_nullable
-              as Offset,
-      draggedPlayerStatus: null == draggedPlayerStatus
-          ? _value.draggedPlayerStatus
-          : draggedPlayerStatus // ignore: cast_nullable_to_non_nullable
+      playerStatus: null == playerStatus
+          ? _value.playerStatus
+          : playerStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      playerPosition: freezed == playerPosition
+          ? _value.playerPosition
+          : playerPosition // ignore: cast_nullable_to_non_nullable
+              as Offset?,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      playerOnFieldTime: freezed == playerOnFieldTime
+          ? _value.playerOnFieldTime
+          : playerOnFieldTime // ignore: cast_nullable_to_non_nullable
+              as Duration?,
     ) as $Val);
   }
 }
@@ -92,9 +106,11 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<Player> players,
-      String draggedPlayerName,
-      Offset draggedPlayerPosition,
-      String draggedPlayerStatus});
+      String playerID,
+      String playerStatus,
+      Offset? playerPosition,
+      DateTime? startTime,
+      Duration? playerOnFieldTime});
 }
 
 /// @nodoc
@@ -111,27 +127,37 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? players = null,
-    Object? draggedPlayerName = null,
-    Object? draggedPlayerPosition = null,
-    Object? draggedPlayerStatus = null,
+    Object? playerID = null,
+    Object? playerStatus = null,
+    Object? playerPosition = freezed,
+    Object? startTime = freezed,
+    Object? playerOnFieldTime = freezed,
   }) {
     return _then(_$PlayerStateImpl(
       players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
-      draggedPlayerName: null == draggedPlayerName
-          ? _value.draggedPlayerName
-          : draggedPlayerName // ignore: cast_nullable_to_non_nullable
+      playerID: null == playerID
+          ? _value.playerID
+          : playerID // ignore: cast_nullable_to_non_nullable
               as String,
-      draggedPlayerPosition: null == draggedPlayerPosition
-          ? _value.draggedPlayerPosition
-          : draggedPlayerPosition // ignore: cast_nullable_to_non_nullable
-              as Offset,
-      draggedPlayerStatus: null == draggedPlayerStatus
-          ? _value.draggedPlayerStatus
-          : draggedPlayerStatus // ignore: cast_nullable_to_non_nullable
+      playerStatus: null == playerStatus
+          ? _value.playerStatus
+          : playerStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      playerPosition: freezed == playerPosition
+          ? _value.playerPosition
+          : playerPosition // ignore: cast_nullable_to_non_nullable
+              as Offset?,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      playerOnFieldTime: freezed == playerOnFieldTime
+          ? _value.playerOnFieldTime
+          : playerOnFieldTime // ignore: cast_nullable_to_non_nullable
+              as Duration?,
     ));
   }
 }
@@ -141,9 +167,11 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
 class _$PlayerStateImpl implements _PlayerState {
   _$PlayerStateImpl(
       {final List<Player> players = const [],
-      this.draggedPlayerName = '',
-      this.draggedPlayerPosition = Offset.zero,
-      this.draggedPlayerStatus = ''})
+      this.playerID = '',
+      this.playerStatus = '',
+      this.playerPosition = null,
+      this.startTime = null,
+      this.playerOnFieldTime = null})
       : _players = players;
 
   final List<Player> _players;
@@ -157,17 +185,23 @@ class _$PlayerStateImpl implements _PlayerState {
 
   @override
   @JsonKey()
-  final String draggedPlayerName;
+  final String playerID;
   @override
   @JsonKey()
-  final Offset draggedPlayerPosition;
+  final String playerStatus;
   @override
   @JsonKey()
-  final String draggedPlayerStatus;
+  final Offset? playerPosition;
+  @override
+  @JsonKey()
+  final DateTime? startTime;
+  @override
+  @JsonKey()
+  final Duration? playerOnFieldTime;
 
   @override
   String toString() {
-    return 'PlayerState(players: $players, draggedPlayerName: $draggedPlayerName, draggedPlayerPosition: $draggedPlayerPosition, draggedPlayerStatus: $draggedPlayerStatus)';
+    return 'PlayerState(players: $players, playerID: $playerID, playerStatus: $playerStatus, playerPosition: $playerPosition, startTime: $startTime, playerOnFieldTime: $playerOnFieldTime)';
   }
 
   @override
@@ -176,21 +210,27 @@ class _$PlayerStateImpl implements _PlayerState {
         (other.runtimeType == runtimeType &&
             other is _$PlayerStateImpl &&
             const DeepCollectionEquality().equals(other._players, _players) &&
-            (identical(other.draggedPlayerName, draggedPlayerName) ||
-                other.draggedPlayerName == draggedPlayerName) &&
-            (identical(other.draggedPlayerPosition, draggedPlayerPosition) ||
-                other.draggedPlayerPosition == draggedPlayerPosition) &&
-            (identical(other.draggedPlayerStatus, draggedPlayerStatus) ||
-                other.draggedPlayerStatus == draggedPlayerStatus));
+            (identical(other.playerID, playerID) ||
+                other.playerID == playerID) &&
+            (identical(other.playerStatus, playerStatus) ||
+                other.playerStatus == playerStatus) &&
+            (identical(other.playerPosition, playerPosition) ||
+                other.playerPosition == playerPosition) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.playerOnFieldTime, playerOnFieldTime) ||
+                other.playerOnFieldTime == playerOnFieldTime));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_players),
-      draggedPlayerName,
-      draggedPlayerPosition,
-      draggedPlayerStatus);
+      playerID,
+      playerStatus,
+      playerPosition,
+      startTime,
+      playerOnFieldTime);
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.
@@ -204,18 +244,24 @@ class _$PlayerStateImpl implements _PlayerState {
 abstract class _PlayerState implements PlayerState {
   factory _PlayerState(
       {final List<Player> players,
-      final String draggedPlayerName,
-      final Offset draggedPlayerPosition,
-      final String draggedPlayerStatus}) = _$PlayerStateImpl;
+      final String playerID,
+      final String playerStatus,
+      final Offset? playerPosition,
+      final DateTime? startTime,
+      final Duration? playerOnFieldTime}) = _$PlayerStateImpl;
 
   @override
   List<Player> get players;
   @override
-  String get draggedPlayerName;
+  String get playerID;
   @override
-  Offset get draggedPlayerPosition;
+  String get playerStatus;
   @override
-  String get draggedPlayerStatus;
+  Offset? get playerPosition;
+  @override
+  DateTime? get startTime;
+  @override
+  Duration? get playerOnFieldTime;
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.

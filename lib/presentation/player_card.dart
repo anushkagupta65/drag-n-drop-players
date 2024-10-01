@@ -16,6 +16,10 @@ class PlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final position =
+        context.read<PlayerCubit>().state.playerPosition ?? null;
+    // final status = context.read<PlayerCubit>().state.draggedPlayerStatus[player.name];
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -49,10 +53,10 @@ class PlayerCard extends StatelessWidget {
             radius: 28,
             backgroundColor: Theme.of(context).colorScheme.primary,
             child: Text(
-              '${player.name}\n${player.status}',
+              '${player.name},${player.status}',
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 12,
               ),
               textAlign: TextAlign.center,
             ),
@@ -60,8 +64,14 @@ class PlayerCard extends StatelessWidget {
           onDragStarted: () {
             context
                 .read<PlayerCubit>()
-                .updatePosition(player.position, player.name, crossLine);
+                .updatePosition(position, player.name, crossLine);
           },
+          // onDragEnd: (details) {
+          //   final playerOnFieldTime = context
+          //       .read<PlayerCubit>()
+          //       .playerOnFieldTime(player.name, status, position);
+          //   print("${player.name}: $playerOnFieldTime");
+          // },
         ),
       ),
     );
