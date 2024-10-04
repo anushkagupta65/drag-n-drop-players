@@ -104,20 +104,38 @@ class PlayerFieldWidget extends StatelessWidget {
                       .updatePosition(player.id, dropPosition, crossLine);
                 },
                 builder: (context, candidateData, rejectedData) {
-                  return Container(
-                    color: Theme.of(context).colorScheme.surfaceBright,
-                    height: 160,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: offFieldPlayers.length,
-                      itemBuilder: (context, index) {
-                        Player player = offFieldPlayers[index];
-                        return PlayerCard(
-                          player: player,
-                          crossLine: crossLine,
-                        );
-                      },
-                    ),
+                  return Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        color: Theme.of(context).colorScheme.surfaceBright,
+                        child: const Center(
+                          child: Text(
+                            'Bench',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        color: Theme.of(context).colorScheme.surfaceBright,
+                        height: 160,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: offFieldPlayers.length,
+                          itemBuilder: (context, index) {
+                            Player player = offFieldPlayers[index];
+                            return PlayerCard(
+                              player: player,
+                              crossLine: crossLine,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),

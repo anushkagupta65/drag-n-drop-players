@@ -18,12 +18,6 @@ class PlayerCubit extends Cubit<PlayerState> {
       newStatus = "Off";
     }
 
-    // emit(state.copyWith(
-    //   playerID: playerID,
-    //   playerPosition: newPosition,
-    //   playerStatus: newStatus,
-    // ));
-
     updatePlayerPositionAndStatus(playerID, newPosition, newStatus);
   }
 

@@ -16,8 +16,6 @@ class PlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final position = context.read<PlayerCubit>().state.playerPosition ?? null;
-
     return BlocBuilder<PlayerCubit, PlayerState>(
       builder: (context, state) {
         return Padding(
@@ -61,11 +59,6 @@ class PlayerCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              // onDragStarted: () {
-              //   context
-              //       .read<PlayerCubit>()
-              //       .updatePosition(player.id, position, crossLine);
-              // },
             ),
           ),
         );
