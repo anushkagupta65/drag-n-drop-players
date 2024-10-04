@@ -37,14 +37,14 @@ class PlayerFieldWidget extends StatelessWidget {
                     Positioned.fill(
                       child: DragTarget<Player>(
                         onWillAcceptWithDetails: (details) {
-                          return true;
+                          return onFieldPlayers.length < 11;
                         },
                         onAcceptWithDetails: (details) {
                           final player = details.data;
                           final dropPosition = details.offset;
 
                           context.read<PlayerCubit>().updatePosition(
-                              dropPosition, player.name, crossLine);
+                              player.id, dropPosition, crossLine);
                         },
                         builder: (context, candidateData, rejectedData) {
                           return Stack(
@@ -101,7 +101,7 @@ class PlayerFieldWidget extends StatelessWidget {
 
                   context
                       .read<PlayerCubit>()
-                      .updatePosition(dropPosition, player.name, crossLine);
+                      .updatePosition(player.id, dropPosition, crossLine);
                 },
                 builder: (context, candidateData, rejectedData) {
                   return Container(

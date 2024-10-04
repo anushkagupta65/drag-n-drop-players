@@ -7,7 +7,8 @@ class Player {
   final String nationality;
   final String status;
   final Offset? position;
-  final Duration? onFieldTime;
+  final int? onFieldTime;
+  final DateTime? startTime;
 
   Player({
     required this.id,
@@ -17,6 +18,7 @@ class Player {
     this.status = "",
     this.position,
     this.onFieldTime,
+    this.startTime,
   });
 
   Player copyWith({
@@ -26,7 +28,8 @@ class Player {
     String? nationality,
     String? status,
     Offset? position,
-    Duration? onFieldTime,
+    int? onFieldTime,
+    DateTime? startTime,
   }) {
     return Player(
       id: id ?? this.id,
@@ -36,6 +39,7 @@ class Player {
       status: status ?? this.status,
       position: position ?? this.position,
       onFieldTime: onFieldTime ?? this.onFieldTime,
+      startTime: startTime ?? this.startTime,
     );
   }
 }

@@ -16,11 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PlayerState {
-  List<Player> get players => throw _privateConstructorUsedError;
-  String get playerID => throw _privateConstructorUsedError;
-  String get playerStatus => throw _privateConstructorUsedError;
-  Offset? get playerPosition => throw _privateConstructorUsedError;
-  DateTime? get startTime => throw _privateConstructorUsedError;
+  List<Player> get players =>
+      throw _privateConstructorUsedError; // @Default('') String playerID,
+// @Default('') String playerStatus,
+// @Default(null) Offset? playerPosition,
   Duration? get playerOnFieldTime => throw _privateConstructorUsedError;
 
   /// Create a copy of PlayerState
@@ -36,13 +35,7 @@ abstract class $PlayerStateCopyWith<$Res> {
           PlayerState value, $Res Function(PlayerState) then) =
       _$PlayerStateCopyWithImpl<$Res, PlayerState>;
   @useResult
-  $Res call(
-      {List<Player> players,
-      String playerID,
-      String playerStatus,
-      Offset? playerPosition,
-      DateTime? startTime,
-      Duration? playerOnFieldTime});
+  $Res call({List<Player> players, Duration? playerOnFieldTime});
 }
 
 /// @nodoc
@@ -61,10 +54,6 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
   @override
   $Res call({
     Object? players = null,
-    Object? playerID = null,
-    Object? playerStatus = null,
-    Object? playerPosition = freezed,
-    Object? startTime = freezed,
     Object? playerOnFieldTime = freezed,
   }) {
     return _then(_value.copyWith(
@@ -72,22 +61,6 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
-      playerID: null == playerID
-          ? _value.playerID
-          : playerID // ignore: cast_nullable_to_non_nullable
-              as String,
-      playerStatus: null == playerStatus
-          ? _value.playerStatus
-          : playerStatus // ignore: cast_nullable_to_non_nullable
-              as String,
-      playerPosition: freezed == playerPosition
-          ? _value.playerPosition
-          : playerPosition // ignore: cast_nullable_to_non_nullable
-              as Offset?,
-      startTime: freezed == startTime
-          ? _value.startTime
-          : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       playerOnFieldTime: freezed == playerOnFieldTime
           ? _value.playerOnFieldTime
           : playerOnFieldTime // ignore: cast_nullable_to_non_nullable
@@ -104,13 +77,7 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
       __$$PlayerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<Player> players,
-      String playerID,
-      String playerStatus,
-      Offset? playerPosition,
-      DateTime? startTime,
-      Duration? playerOnFieldTime});
+  $Res call({List<Player> players, Duration? playerOnFieldTime});
 }
 
 /// @nodoc
@@ -127,10 +94,6 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? players = null,
-    Object? playerID = null,
-    Object? playerStatus = null,
-    Object? playerPosition = freezed,
-    Object? startTime = freezed,
     Object? playerOnFieldTime = freezed,
   }) {
     return _then(_$PlayerStateImpl(
@@ -138,22 +101,6 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
-      playerID: null == playerID
-          ? _value.playerID
-          : playerID // ignore: cast_nullable_to_non_nullable
-              as String,
-      playerStatus: null == playerStatus
-          ? _value.playerStatus
-          : playerStatus // ignore: cast_nullable_to_non_nullable
-              as String,
-      playerPosition: freezed == playerPosition
-          ? _value.playerPosition
-          : playerPosition // ignore: cast_nullable_to_non_nullable
-              as Offset?,
-      startTime: freezed == startTime
-          ? _value.startTime
-          : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       playerOnFieldTime: freezed == playerOnFieldTime
           ? _value.playerOnFieldTime
           : playerOnFieldTime // ignore: cast_nullable_to_non_nullable
@@ -166,12 +113,7 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
 
 class _$PlayerStateImpl implements _PlayerState {
   _$PlayerStateImpl(
-      {final List<Player> players = const [],
-      this.playerID = '',
-      this.playerStatus = '',
-      this.playerPosition = null,
-      this.startTime = null,
-      this.playerOnFieldTime = null})
+      {final List<Player> players = const [], this.playerOnFieldTime = null})
       : _players = players;
 
   final List<Player> _players;
@@ -183,25 +125,16 @@ class _$PlayerStateImpl implements _PlayerState {
     return EqualUnmodifiableListView(_players);
   }
 
-  @override
-  @JsonKey()
-  final String playerID;
-  @override
-  @JsonKey()
-  final String playerStatus;
-  @override
-  @JsonKey()
-  final Offset? playerPosition;
-  @override
-  @JsonKey()
-  final DateTime? startTime;
+// @Default('') String playerID,
+// @Default('') String playerStatus,
+// @Default(null) Offset? playerPosition,
   @override
   @JsonKey()
   final Duration? playerOnFieldTime;
 
   @override
   String toString() {
-    return 'PlayerState(players: $players, playerID: $playerID, playerStatus: $playerStatus, playerPosition: $playerPosition, startTime: $startTime, playerOnFieldTime: $playerOnFieldTime)';
+    return 'PlayerState(players: $players, playerOnFieldTime: $playerOnFieldTime)';
   }
 
   @override
@@ -210,27 +143,13 @@ class _$PlayerStateImpl implements _PlayerState {
         (other.runtimeType == runtimeType &&
             other is _$PlayerStateImpl &&
             const DeepCollectionEquality().equals(other._players, _players) &&
-            (identical(other.playerID, playerID) ||
-                other.playerID == playerID) &&
-            (identical(other.playerStatus, playerStatus) ||
-                other.playerStatus == playerStatus) &&
-            (identical(other.playerPosition, playerPosition) ||
-                other.playerPosition == playerPosition) &&
-            (identical(other.startTime, startTime) ||
-                other.startTime == startTime) &&
             (identical(other.playerOnFieldTime, playerOnFieldTime) ||
                 other.playerOnFieldTime == playerOnFieldTime));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_players),
-      playerID,
-      playerStatus,
-      playerPosition,
-      startTime,
-      playerOnFieldTime);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_players), playerOnFieldTime);
 
   /// Create a copy of PlayerState
   /// with the given fields replaced by the non-null parameter values.
@@ -244,22 +163,12 @@ class _$PlayerStateImpl implements _PlayerState {
 abstract class _PlayerState implements PlayerState {
   factory _PlayerState(
       {final List<Player> players,
-      final String playerID,
-      final String playerStatus,
-      final Offset? playerPosition,
-      final DateTime? startTime,
       final Duration? playerOnFieldTime}) = _$PlayerStateImpl;
 
   @override
-  List<Player> get players;
-  @override
-  String get playerID;
-  @override
-  String get playerStatus;
-  @override
-  Offset? get playerPosition;
-  @override
-  DateTime? get startTime;
+  List<Player> get players; // @Default('') String playerID,
+// @Default('') String playerStatus,
+// @Default(null) Offset? playerPosition,
   @override
   Duration? get playerOnFieldTime;
 
